@@ -1,3 +1,10 @@
+# Hiring group with React
+
+Made with React, [TanStack Router](https://tanstack.com/router/latest/docs/framework/react/quick-start), and [ShadCN UI](https://ui.shadcn.com/docs/installation/vite).
+
+
+-----
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
