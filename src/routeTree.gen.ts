@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as UserRouteRouteImport } from './routes/user/route'
+import { Route as CompanyRouteRouteImport } from './routes/company/route'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 
 const LoginRoute = LoginRouteImport.update({
@@ -29,6 +32,21 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UserRouteRoute = UserRouteRouteImport.update({
+  id: '/user',
+  path: '/user',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyRouteRoute = CompanyRouteRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +55,18 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRoute
+  '/company': typeof CompanyRouteRoute
+  '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRoute
+  '/company': typeof CompanyRouteRoute
+  '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
@@ -50,20 +74,41 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRoute
+  '/company': typeof CompanyRouteRoute
+  '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/app' | '/login'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/company'
+    | '/user'
+    | '/about'
+    | '/app'
+    | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/app' | '/login'
-  id: '__root__' | '/' | '/about' | '/app' | '/login'
+  to: '/' | '/admin' | '/company' | '/user' | '/about' | '/app' | '/login'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/company'
+    | '/user'
+    | '/about'
+    | '/app'
+    | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRoute
+  CompanyRouteRoute: typeof CompanyRouteRoute
+  UserRouteRoute: typeof UserRouteRoute
   AboutRoute: typeof AboutRoute
   AppRoute: typeof AppRoute
   LoginRoute: typeof LoginRoute
@@ -92,6 +137,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/user': {
+      id: '/user'
+      path: '/user'
+      fullPath: '/user'
+      preLoaderRoute: typeof UserRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +170,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRoute,
+  CompanyRouteRoute: CompanyRouteRoute,
+  UserRouteRoute: UserRouteRoute,
   AboutRoute: AboutRoute,
   AppRoute: AppRoute,
   LoginRoute: LoginRoute,
