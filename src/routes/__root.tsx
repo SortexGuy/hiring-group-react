@@ -4,9 +4,9 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 export const Route = createRootRoute({
   component: () => (
     <>
-      {/* Fondo con grid */}
+      {/* Fondo con grid - Ahora abarca toda la página */}
       <div
-        className="absolute inset-0 "
+        className="fixed inset-0 z-0" // Usar fixed para que cubra toda la ventana y z-0 para que esté detrás
         style={{
           backgroundImage: `
             linear-gradient(to right, #e5e7eb 1px, transparent 1px),
@@ -15,41 +15,32 @@ export const Route = createRootRoute({
           backgroundSize: "40px 40px",
         }}
       />
-      <div className="p-2 flex gap-2 z-20 relative bg-white/80 backdrop-blur-sm">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{" "}
-        <Link to="/app" className="[&.active]:font-bold">
-          App
-        </Link>{" "}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-      </div>
-      <hr />
 
-      <div className="min-h-screen w-full bg-white relative flex items-center justify-center">
-        {/* Contenido */}
-        <div className="relative z-10 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-          <h1 className="text-2xl font-bold mb-4">Panel Admin</h1>
-          <ul className="space-y-3">
-            <li className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition">
-              Nigga
-            </li>
-            <li className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition">
-              Nigga
-            </li>
-            <li className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition">
-              Nigga
-            </li>
-            <li className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition">
-              Nigga
-            </li>
-          </ul>
+      {/* Contenedor principal para el layout y el contenido */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {" "}
+        {/* z-10 para que esté por encima del fondo */}
+        {/* Barra de navegación */}
+        <div className="p-2 flex gap-2 bg-white/80 backdrop-blur-sm shadow-sm">
+          <Link to="/" className="[&.active]:font-bold">
+            Home
+          </Link>{" "}
+          <Link to="/app" className="[&.active]:font-bold">
+            App
+          </Link>{" "}
+          <Link to="/about" className="[&.active]:font-bold">
+            About
+          </Link>
+        </div>
+        <hr />
+        {/* Contenido de la página - Esto es lo que Outlet renderizará */}
+        <div className="flex-grow flex items-center justify-center p-4">
+          {" "}
+          {/* flex-grow para que ocupe el espacio restante */}
+          <Outlet />
         </div>
       </div>
 
-      <Outlet />
       <TanStackRouterDevtools />
     </>
   ),
