@@ -4,7 +4,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 export const Route = createRootRoute({
   component: () => (
     <>
-      {/* Fondo con grid - Ahora abarca toda la página */}
+      {/* Fondo */}
       <div
         className="fixed inset-0 z-0"
         style={{
@@ -16,11 +16,9 @@ export const Route = createRootRoute({
         }}
       />
 
-      {/* Contenedor principal para el layout y el contenido */}
+      {/* Contenedor principal */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {" "}
-        {/* z-10 para que esté por encima del fondo */}
-        {/* Barra de navegación */}
         <div className="p-2 flex gap-2 bg-white/80 backdrop-blur-sm shadow-sm">
           <Link to="/" className="[&.active]:font-bold">
             Home
@@ -31,12 +29,13 @@ export const Route = createRootRoute({
           <Link to="/about" className="[&.active]:font-bold">
             About
           </Link>
+          <Link to="/login" className="[&.active]:font-bold">
+            Login
+          </Link>
         </div>
         <hr />
-        {/* Contenido de la página - Esto es lo que Outlet renderizará */}
         <div className="flex-grow flex items-center justify-center p-4">
           {" "}
-          {/* flex-grow para que ocupe el espacio restante */}
           <Outlet />
         </div>
       </div>
