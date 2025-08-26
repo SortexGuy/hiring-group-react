@@ -6,7 +6,7 @@ export const Route = createRootRoute({
     <>
       {/* Fondo con grid - Ahora abarca toda la página */}
       <div
-        className="fixed inset-0 z-0" // Usar fixed para que cubra toda la ventana y z-0 para que esté detrás
+        className="fixed inset-0 z-0"
         style={{
           backgroundImage: `
             linear-gradient(to right, #e5e7eb 1px, transparent 1px),
