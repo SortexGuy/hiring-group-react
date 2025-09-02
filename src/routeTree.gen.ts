@@ -16,6 +16,10 @@ import { Route as UserRouteRouteImport } from './routes/user/route'
 import { Route as CompanyRouteRouteImport } from './routes/company/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminReportes_nominaRouteImport } from './routes/admin/reportes_nomina'
+import { Route as AdminGestion_usuarioRouteImport } from './routes/admin/gestion_usuario'
+import { Route as AdminGenerar_nominaRouteImport } from './routes/admin/generar_nomina'
+import { Route as AdminContratar_postulanteRouteImport } from './routes/admin/contratar_postulante'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -52,34 +56,67 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminReportes_nominaRoute = AdminReportes_nominaRouteImport.update({
+  id: '/reportes_nomina',
+  path: '/reportes_nomina',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminGestion_usuarioRoute = AdminGestion_usuarioRouteImport.update({
+  id: '/gestion_usuario',
+  path: '/gestion_usuario',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminGenerar_nominaRoute = AdminGenerar_nominaRouteImport.update({
+  id: '/generar_nomina',
+  path: '/generar_nomina',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminContratar_postulanteRoute =
+  AdminContratar_postulanteRouteImport.update({
+    id: '/contratar_postulante',
+    path: '/contratar_postulante',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
+  '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
+  '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
+  '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
+  '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
+  '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
+  '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
+  '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
+  '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
   '/about': typeof AboutRoute
   '/app': typeof AppRoute
   '/login': typeof LoginRoute
+  '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
+  '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
+  '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
+  '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,8 +128,23 @@ export interface FileRouteTypes {
     | '/about'
     | '/app'
     | '/login'
+    | '/admin/contratar_postulante'
+    | '/admin/generar_nomina'
+    | '/admin/gestion_usuario'
+    | '/admin/reportes_nomina'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/company' | '/user' | '/about' | '/app' | '/login'
+  to:
+    | '/'
+    | '/admin'
+    | '/company'
+    | '/user'
+    | '/about'
+    | '/app'
+    | '/login'
+    | '/admin/contratar_postulante'
+    | '/admin/generar_nomina'
+    | '/admin/gestion_usuario'
+    | '/admin/reportes_nomina'
   id:
     | '__root__'
     | '/'
@@ -102,11 +154,15 @@ export interface FileRouteTypes {
     | '/about'
     | '/app'
     | '/login'
+    | '/admin/contratar_postulante'
+    | '/admin/generar_nomina'
+    | '/admin/gestion_usuario'
+    | '/admin/reportes_nomina'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRouteRoute: typeof AdminRouteRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   CompanyRouteRoute: typeof CompanyRouteRoute
   UserRouteRoute: typeof UserRouteRoute
   AboutRoute: typeof AboutRoute
@@ -165,12 +221,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/reportes_nomina': {
+      id: '/admin/reportes_nomina'
+      path: '/reportes_nomina'
+      fullPath: '/admin/reportes_nomina'
+      preLoaderRoute: typeof AdminReportes_nominaRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/gestion_usuario': {
+      id: '/admin/gestion_usuario'
+      path: '/gestion_usuario'
+      fullPath: '/admin/gestion_usuario'
+      preLoaderRoute: typeof AdminGestion_usuarioRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/generar_nomina': {
+      id: '/admin/generar_nomina'
+      path: '/generar_nomina'
+      fullPath: '/admin/generar_nomina'
+      preLoaderRoute: typeof AdminGenerar_nominaRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/contratar_postulante': {
+      id: '/admin/contratar_postulante'
+      path: '/contratar_postulante'
+      fullPath: '/admin/contratar_postulante'
+      preLoaderRoute: typeof AdminContratar_postulanteRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminContratar_postulanteRoute: typeof AdminContratar_postulanteRoute
+  AdminGenerar_nominaRoute: typeof AdminGenerar_nominaRoute
+  AdminGestion_usuarioRoute: typeof AdminGestion_usuarioRoute
+  AdminReportes_nominaRoute: typeof AdminReportes_nominaRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminContratar_postulanteRoute: AdminContratar_postulanteRoute,
+  AdminGenerar_nominaRoute: AdminGenerar_nominaRoute,
+  AdminGestion_usuarioRoute: AdminGestion_usuarioRoute,
+  AdminReportes_nominaRoute: AdminReportes_nominaRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRouteRoute: AdminRouteRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   CompanyRouteRoute: CompanyRouteRoute,
   UserRouteRoute: UserRouteRoute,
   AboutRoute: AboutRoute,

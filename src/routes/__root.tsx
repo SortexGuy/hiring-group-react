@@ -17,7 +17,7 @@ export const Route = createRootRoute({
       />
 
       {/* Contenedor principal */}
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="relative z-10 min-w-9/10 flex flex-col">
         {" "}
         <div className="p-2 flex gap-2 bg-white/80 backdrop-blur-sm shadow-sm">
           <Link to="/" className="[&.active]:font-bold">

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import "./app.css";
 
 export const Route = createFileRoute("/app")({
@@ -23,9 +23,11 @@ function App() {
             {menuItems.map((item) => (
               <li
                 key={item.id}
-                className="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition"
+                className="rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition"
               >
-                {item.label}
+                <Link to={"/admin/" + item.id} className="p-3 block" >
+                  <p>{item.label}</p>
+                </Link>
               </li>
             ))}
           </ul>
