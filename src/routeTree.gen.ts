@@ -9,33 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as AppRouteImport } from './routes/app'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as UserRouteRouteImport } from './routes/user/route'
 import { Route as CompanyRouteRouteImport } from './routes/company/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as homeRouteRouteImport } from './routes/(home)/route'
+import { Route as homeIndexRouteImport } from './routes/(home)/index'
 import { Route as AdminReportes_nominaRouteImport } from './routes/admin/reportes_nomina'
 import { Route as AdminGestion_usuarioRouteImport } from './routes/admin/gestion_usuario'
 import { Route as AdminGenerar_nominaRouteImport } from './routes/admin/generar_nomina'
 import { Route as AdminContratar_postulanteRouteImport } from './routes/admin/contratar_postulante'
+import { Route as homeLoginRouteImport } from './routes/(home)/login'
+import { Route as homeAppRouteImport } from './routes/(home)/app'
+import { Route as homeAboutRouteImport } from './routes/(home)/about'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppRoute = AppRouteImport.update({
-  id: '/app',
-  path: '/app',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const UserRouteRoute = UserRouteRouteImport.update({
   id: '/user',
   path: '/user',
@@ -51,10 +37,14 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const homeRouteRoute = homeRouteRouteImport.update({
+  id: '/(home)',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const homeIndexRoute = homeIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => homeRouteRoute,
 } as any)
 const AdminReportes_nominaRoute = AdminReportes_nominaRouteImport.update({
   id: '/reportes_nomina',
@@ -77,46 +67,62 @@ const AdminContratar_postulanteRoute =
     path: '/contratar_postulante',
     getParentRoute: () => AdminRouteRoute,
   } as any)
+const homeLoginRoute = homeLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => homeRouteRoute,
+} as any)
+const homeAppRoute = homeAppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => homeRouteRoute,
+} as any)
+const homeAboutRoute = homeAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => homeRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof homeIndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
-  '/about': typeof AboutRoute
-  '/app': typeof AppRoute
-  '/login': typeof LoginRoute
+  '/about': typeof homeAboutRoute
+  '/app': typeof homeAppRoute
+  '/login': typeof homeLoginRoute
   '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
   '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
   '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
   '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
-  '/about': typeof AboutRoute
-  '/app': typeof AppRoute
-  '/login': typeof LoginRoute
+  '/about': typeof homeAboutRoute
+  '/app': typeof homeAppRoute
+  '/login': typeof homeLoginRoute
   '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
   '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
   '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
   '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
+  '/': typeof homeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/(home)': typeof homeRouteRouteWithChildren
   '/admin': typeof AdminRouteRouteWithChildren
   '/company': typeof CompanyRouteRoute
   '/user': typeof UserRouteRoute
-  '/about': typeof AboutRoute
-  '/app': typeof AppRoute
-  '/login': typeof LoginRoute
+  '/(home)/about': typeof homeAboutRoute
+  '/(home)/app': typeof homeAppRoute
+  '/(home)/login': typeof homeLoginRoute
   '/admin/contratar_postulante': typeof AdminContratar_postulanteRoute
   '/admin/generar_nomina': typeof AdminGenerar_nominaRoute
   '/admin/gestion_usuario': typeof AdminGestion_usuarioRoute
   '/admin/reportes_nomina': typeof AdminReportes_nominaRoute
+  '/(home)/': typeof homeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -134,7 +140,6 @@ export interface FileRouteTypes {
     | '/admin/reportes_nomina'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/admin'
     | '/company'
     | '/user'
@@ -145,54 +150,32 @@ export interface FileRouteTypes {
     | '/admin/generar_nomina'
     | '/admin/gestion_usuario'
     | '/admin/reportes_nomina'
+    | '/'
   id:
     | '__root__'
-    | '/'
+    | '/(home)'
     | '/admin'
     | '/company'
     | '/user'
-    | '/about'
-    | '/app'
-    | '/login'
+    | '/(home)/about'
+    | '/(home)/app'
+    | '/(home)/login'
     | '/admin/contratar_postulante'
     | '/admin/generar_nomina'
     | '/admin/gestion_usuario'
     | '/admin/reportes_nomina'
+    | '/(home)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  homeRouteRoute: typeof homeRouteRouteWithChildren
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   CompanyRouteRoute: typeof CompanyRouteRoute
   UserRouteRoute: typeof UserRouteRoute
-  AboutRoute: typeof AboutRoute
-  AppRoute: typeof AppRoute
-  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/app': {
-      id: '/app'
-      path: '/app'
-      fullPath: '/app'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/user': {
       id: '/user'
       path: '/user'
@@ -214,12 +197,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(home)': {
+      id: '/(home)'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof homeRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(home)/': {
+      id: '/(home)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof homeIndexRouteImport
+      parentRoute: typeof homeRouteRoute
     }
     '/admin/reportes_nomina': {
       id: '/admin/reportes_nomina'
@@ -249,8 +239,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminContratar_postulanteRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/(home)/login': {
+      id: '/(home)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof homeLoginRouteImport
+      parentRoute: typeof homeRouteRoute
+    }
+    '/(home)/app': {
+      id: '/(home)/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof homeAppRouteImport
+      parentRoute: typeof homeRouteRoute
+    }
+    '/(home)/about': {
+      id: '/(home)/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof homeAboutRouteImport
+      parentRoute: typeof homeRouteRoute
+    }
   }
 }
+
+interface homeRouteRouteChildren {
+  homeAboutRoute: typeof homeAboutRoute
+  homeAppRoute: typeof homeAppRoute
+  homeLoginRoute: typeof homeLoginRoute
+  homeIndexRoute: typeof homeIndexRoute
+}
+
+const homeRouteRouteChildren: homeRouteRouteChildren = {
+  homeAboutRoute: homeAboutRoute,
+  homeAppRoute: homeAppRoute,
+  homeLoginRoute: homeLoginRoute,
+  homeIndexRoute: homeIndexRoute,
+}
+
+const homeRouteRouteWithChildren = homeRouteRoute._addFileChildren(
+  homeRouteRouteChildren,
+)
 
 interface AdminRouteRouteChildren {
   AdminContratar_postulanteRoute: typeof AdminContratar_postulanteRoute
@@ -271,13 +300,10 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  homeRouteRoute: homeRouteRouteWithChildren,
   AdminRouteRoute: AdminRouteRouteWithChildren,
   CompanyRouteRoute: CompanyRouteRoute,
   UserRouteRoute: UserRouteRoute,
-  AboutRoute: AboutRoute,
-  AppRoute: AppRoute,
-  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
