@@ -15,13 +15,13 @@ function App() {
 
   return (
     <>
-      <div className="relative z-10 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
+      <div className="relative z-10 bg-primary/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-primary-foreground">
         <h1 className="text-2xl font-bold mb-4">Panel Admin</h1>
         <ul className="space-y-3">
           {menuItems.map((item) => (
             <li
               key={item.id}
-              className="rounded-xl bg-gray-100 hover:bg-gray-200 cursor-pointer transition"
+              className="rounded-xl bg-primary hover:bg-secondary hover:text-secondary-foreground cursor-pointer transition"
             >
               <Link to={"/admin/" + item.id} className="p-3 block" >
                 <p>{item.label}</p>
