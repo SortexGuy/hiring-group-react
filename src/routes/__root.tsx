@@ -15,11 +15,12 @@ export const Route = createRootRoute({
           backgroundSize: "40px 40px",
         }}
       />
-
+      {/* Aqui ira el boton para cambiar el modo oscuro */}
+      <div className=""></div>
       {/* Contenedor principal */}
       <div className="relative z-10 min-w-9/10 flex flex-col">
         {" "}
-        <Outlet/>
+        <Outlet />
       </div>
 
       <TanStackRouterDevtools />
